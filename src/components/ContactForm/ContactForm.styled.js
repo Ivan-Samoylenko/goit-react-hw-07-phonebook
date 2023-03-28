@@ -16,7 +16,7 @@ export const Form = styled.form`
   border-radius: ${p => p.theme.radii.main};
 `;
 
-export const FieldWraper = styled.label`
+export const FieldWrapper = styled.label`
   padding: ${p => p.theme.space[1]};
 
   display: flex;

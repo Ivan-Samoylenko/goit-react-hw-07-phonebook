@@ -1,4 +1,4 @@
-import { FilterWraper, FilterName, FilterField } from './Filter.styled';
+import { FilterWrapper, FilterName, FilterField } from './Filter.styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFilter } from 'redux/selectors';
 import { changeFilter } from 'redux/filterSlice';
@@ -12,9 +12,9 @@ export const Filter = () => {
   }
 
   return (
-    <FilterWraper>
+    <FilterWrapper>
       <FilterName>Find contacts by name</FilterName>
       <FilterField onChange={onChange} value={filter} />
-    </FilterWraper>
+    </FilterWrapper>
   );
 };

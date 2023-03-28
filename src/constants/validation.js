@@ -16,5 +16,5 @@ Yup.addMethod(Yup.string, 'matchNumber', function () {
 
 export const contactsFormValidate = Yup.object({
   name: Yup.string().matchName().required(),
-  number: Yup.string().matchNumber().required(),
+  phone: Yup.string().matchNumber().required(),
 });

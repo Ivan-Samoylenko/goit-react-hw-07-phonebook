@@ -1,24 +1,48 @@
 import { Contacts, ContactsItem, Text } from './ContactList.styled';
 import { Contact } from 'components/Contact';
-import { useSelector } from 'react-redux';
-import { selectContacts, selectFilter } from 'redux/selectors';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectContacts,
+  selectContactsIsLoading,
+  selectContactsError,
+  selectFilter,
+} from 'redux/selectors';
+import { fetchContacts } from 'redux/operations';
+import { useEffect } from 'react';
 
 export const ContactList = () => {
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectContactsIsLoading);
+  const error = useSelector(selectContactsError);
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
-  const filteredContacts = contacts.filter(contact =>
+  const filteredContacts = contacts?.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
 
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   return (
     <>
-      {contacts.length === 0 && (
+      {isLoading && <p>Loading ...</p>}
+      {error && !isLoading && (
+        <>
+          <p>{error}</p>
+          <p>Reload App please</p>
+        </>
+      )}
+      {!isLoading && !error && contacts?.length === 0 && (
         <Text>There are no contacts here yet. add your first contact.</Text>
       )}
-      {contacts.length !== 0 && filteredContacts.length === 0 && (
-        <Text> there are no matches with the "{filter}"</Text>
-      )}
-      {filteredContacts.length !== 0 && (
+      {!isLoading &&
+        !error &&
+        contacts?.length !== 0 &&
+        filteredContacts.length === 0 && (
+          <Text> there are no matches with the "{filter}"</Text>
+        )}
+      {!isLoading && !error && filteredContacts?.length !== 0 && (
         <Contacts>
           {filteredContacts.map(contact => {
             return (

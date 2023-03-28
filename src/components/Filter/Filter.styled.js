@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FilterWraper = styled.label`
+export const FilterWrapper = styled.label`
   width: 312px;
   margin-right: auto;
   margin-left: auto;
