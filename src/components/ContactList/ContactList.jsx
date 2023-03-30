@@ -26,7 +26,6 @@ export const ContactList = () => {
 
   return (
     <>
-      {isLoading && <p>Loading ...</p>}
       {error && !isLoading && (
         <>
           <p>{error}</p>
@@ -42,7 +41,7 @@ export const ContactList = () => {
         filteredContacts.length === 0 && (
           <Text> there are no matches with the "{filter}"</Text>
         )}
-      {!isLoading && !error && filteredContacts?.length !== 0 && (
+      {!error && filteredContacts?.length !== 0 && (
         <Contacts>
           {filteredContacts.map(contact => {
             return (
@@ -53,6 +52,7 @@ export const ContactList = () => {
           })}
         </Contacts>
       )}
+      {isLoading && <p>Loading ...</p>}
     </>
   );
 };
